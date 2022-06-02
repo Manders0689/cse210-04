@@ -1,5 +1,4 @@
 # cse210-04
-# cse210-03
 CSE 210 Week 7
 # Greed
 Greed is a game in which the player seeks to gather as many falling gems as possible. 
