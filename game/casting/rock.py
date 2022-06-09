@@ -1,13 +1,27 @@
-#Class Rock(Actor)
-"""
-An item of negative value. 
+from game.casting.actor import Actor
 
-The responsibility of a gem is to provide a negative point value.
+class Rock(Actor):
 
-Attributes:
-    _value (int): An integer value.
-"""
+    """An item of negative value. 
 
-#__init__
-    #pull in all other attributes from Actor class
-#get_value
+    The responsibility of a rock is to provide a negative point value.
+
+    Attributes:
+        _value (int): An integer value."""
+
+    def __init__(self):
+
+        """Contructs a new Rock
+        Pulls attributes and methods from Actor class """
+
+        super().__init__()
+        self._value = -1
+
+    def get_value(self):
+
+        """Gets the rock's value
+        
+        Returns:
+            Int: The rock's value"""
+
+        return self._value
