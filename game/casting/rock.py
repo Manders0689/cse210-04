@@ -1,8 +1,8 @@
 from game.casting.actor import Actor
 
 class Rock(Actor):
-
-    """An item of negative value. 
+    """
+    An item of negative value. 
 
     The responsibility of a rock is to provide a negative point value.
 
@@ -25,3 +25,12 @@ class Rock(Actor):
             Int: The rock's value"""
 
         return self._value
+    
+    def set_value(self,value):
+        """
+        Updates the value to the given one.
+        
+        Args:
+            value (int): The given value
+        """
+        self._value = value
