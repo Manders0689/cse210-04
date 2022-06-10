@@ -25,7 +25,8 @@ ROWS = 40
 CAPTION = "Greed"
 DATA_PATH = os.path.dirname(os.path.abspath(__file__)) + "/data/messages.txt"
 WHITE = Color(255, 255, 255)
-DEFAULT_ARTIFACTS = 40
+DEFAULT_GEMS = 15
+DEFAULT_ROCKS = 35
 
 
 def main():
@@ -52,15 +53,10 @@ def main():
     robot.set_color(WHITE)
     robot.set_position(position)
     cast.add_actor("robots", robot)
-    
-    # create the artifacts
-    with open(DATA_PATH) as file:
-        data = file.read()
-        messages = data.splitlines()
 
-    for n in range(DEFAULT_ARTIFACTS):
-        text = chr(random.randint(33, 126))
-        message = messages[n]
+    for n in range(DEFAULT_GEMS):
+        text = "*"
+        value = 1
 
         x = random.randint(1, COLS - 1)
         y = random.randint(1, ROWS - 1)
@@ -78,7 +74,22 @@ def main():
         gem.set_color(color)
         gem.set_position(position)
         gem.set_value(value)
+        gem.set_velocity(Point(0,15))
         cast.add_actor("gems", gem)
+        
+    for n in range(DEFAULT_GEMS):
+        text = "@"
+        value = -1
+
+        x = random.randint(1, COLS - 1)
+        y = random.randint(1, ROWS - 1)
+        position = Point(x, y)
+        position = position.scale(CELL_SIZE)
+
+        r = random.randint(0, 255)
+        g = random.randint(0, 255)
+        b = random.randint(0, 255)
+        color = Color(r, g, b)
         
         rock = Rock()
         rock.set_text(text)
@@ -86,6 +97,7 @@ def main():
         rock.set_color(color)
         rock.set_position(position)
         rock.set_value(value)
+        rock.set_velocity(Point(0,15))
         cast.add_actor("rocks", rock)
     
     # start the game

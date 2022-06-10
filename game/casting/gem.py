@@ -26,3 +26,11 @@ class Gem(Actor):
 
         return self._value
 
+    def set_value(self,value):
+        """
+        Updates the value to the given one.
+        
+        Args:
+            value (int): The given value
+        """
+        self._value = value
