@@ -16,15 +16,21 @@ from game.shared.point import Point
 
 
 FRAME_RATE = 12
+# Size of window in pixels
 MAX_X = 900
 MAX_Y = 600
+# Setting a grid for size of cells
 CELL_SIZE = 15
 FONT_SIZE = 15
+# How many columns and rows based on cell size - ( MAX_X / CELL_SIZE = COLS )
 COLS = 60
 ROWS = 40
+# What shows up at top of window
 CAPTION = "Greed"
+# Path for grabbing the messages from the text file
 DATA_PATH = os.path.dirname(os.path.abspath(__file__)) + "/data/messages.txt"
 WHITE = Color(255, 255, 255)
+# Set how many gems and rocks will be created
 DEFAULT_GEMS = 15
 DEFAULT_ROCKS = 35
 
@@ -34,46 +40,63 @@ def main():
     # create the cast
     cast = Cast()
     
-    # create the banner
+    # create the banner - should be placed in own class
+    # This is redunant since we already set these in Actor's __init__
     banner = Actor()
     banner.set_text("")
     banner.set_font_size(FONT_SIZE)
     banner.set_color(WHITE)
     banner.set_position(Point(CELL_SIZE, 0))
+    # add banner to cast dictionary under key "banners"
     cast.add_actor("banners", banner)
     
-    # create the robot
+    # create the robot - should be placed in own class
+    # places robot in center of screen by dividing screen width and height by 2
     x = int(MAX_X / 2)
     y = int(MAX_Y / 2)
     position = Point(x, y)
 
+    # This is redundant since we already set these in the Actor's __init__
     robot = Actor()
     robot.set_text("#")
     robot.set_font_size(FONT_SIZE)
     robot.set_color(WHITE)
     robot.set_position(position)
+    # add robot to cast dictionary under key "robots"
     cast.add_actor("robots", robot)
 
+    # create the gems
+    # for each gem is range set above:
     for n in range(DEFAULT_GEMS):
+        # set image symbol
         text = "*"
-        value = 1
 
+        # create random position, created in CELL_SIZE grid (increments of 15)
         x = random.randint(1, COLS - 1)
         y = random.randint(1, ROWS - 1)
         position = Point(x, y)
+        # scales grid back to pixel size
         position = position.scale(CELL_SIZE)
 
+        # setting random red, green, and blue coloring
         r = random.randint(0, 255)
         g = random.randint(0, 255)
         b = random.randint(0, 255)
         color = Color(r, g, b)
         
+        # set everything up and add to cast dictionary in "gems" key
         gem = Gem()
         gem.set_text(text)
         gem.set_font_size(FONT_SIZE)
+        # set random color 
+        """Do we want this to stay random, or a set color?"""
         gem.set_color(color)
+        # set random position
         gem.set_position(position)
+        # grab value
+        """Is this correct?"""
         gem.set_value(value)
+        # set velocity - adding value to y
         gem.set_velocity(Point(0,15))
         cast.add_actor("gems", gem)
         
