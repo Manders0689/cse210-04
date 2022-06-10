@@ -95,14 +95,13 @@ def main():
         gem.set_position(position)
         # grab value
         """Is this correct?"""
-        gem.set_value(value)
+        #gem.set_value(value)
         # set velocity - adding value to y
         gem.set_velocity(Point(0,15))
         cast.add_actor("gems", gem)
         
     for n in range(DEFAULT_GEMS):
         text = "@"
-        value = -1
 
         x = random.randint(1, COLS - 1)
         y = random.randint(1, ROWS - 1)
@@ -119,7 +118,7 @@ def main():
         rock.set_font_size(FONT_SIZE)
         rock.set_color(color)
         rock.set_position(position)
-        rock.set_value(value)
+        #rock.set_value(value)
         rock.set_velocity(Point(0,15))
         cast.add_actor("rocks", rock)
     
