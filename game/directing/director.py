@@ -20,6 +20,7 @@ class Director:
         """
         self._keyboard_service = keyboard_service
         self._video_service = video_service
+        self.game_score = 0
 
     def start_game(self, cast):
         """Starts the game using the given cast. Runs the main game loop.
@@ -54,22 +55,25 @@ class Director:
         robot = cast.get_first_actor("robots")
         gems = cast.get_actors("gems")
         rocks = cast.get_actors("rocks")
+        
 
-        banner.set_text("")
+        #This banner text works, do not change!!!! :)
+        banner.set_text(f"Game Score: {self.game_score}")
         max_x = self._video_service.get_width()
-        robot.move_next(max_x)
+        max_y = self._video_service.get_height()
+        robot.move_next(max_x, max_y)
         
         for rock in rocks:
+            rock.move_next(max_x, max_y)
             if robot.get_position().equals(rock.get_position()):
                 value = rock.get_value()
-                banner.set_text(value)   
-                #game_score += gem.set_value()
+                self.game_score -= value
         
         for gem in gems:
+            gem.move_next(max_x, max_y)
             if robot.get_position().equals(gem.get_position()):
                 value = gem.get_value()
-                banner.set_text(value)
-                #game_score += gem.set_value()
+                self.game_score += value
         
     def _do_outputs(self, cast):
         """Draws the actors on the screen.
@@ -81,5 +85,3 @@ class Director:
         actors = cast.get_all_actors()
         self._video_service.draw_actors(actors)
         self._video_service.flush_buffer()
-        
-#store/update/outputs total game points  

@@ -27,12 +27,11 @@ COLS = 60
 ROWS = 40
 # What shows up at top of window
 CAPTION = "Greed"
-# Path for grabbing the messages from the text file
-DATA_PATH = os.path.dirname(os.path.abspath(__file__)) + "/data/messages.txt"
 WHITE = Color(255, 255, 255)
 # Set how many gems and rocks will be created
 DEFAULT_GEMS = 15
 DEFAULT_ROCKS = 35
+STARTING_GAME_SCORE = 0
 
 
 def main():
@@ -43,7 +42,6 @@ def main():
     # create the banner - should be placed in own class
     # This is redunant since we already set these in Actor's __init__
     banner = Actor()
-    banner.set_text("")
     banner.set_font_size(FONT_SIZE)
     banner.set_color(WHITE)
     banner.set_position(Point(CELL_SIZE, 0))
@@ -51,9 +49,9 @@ def main():
     cast.add_actor("banners", banner)
     
     # create the robot - should be placed in own class
-    # places robot in center of screen by dividing screen width and height by 2
+    # places robot in center of x, and bottom of y
     x = int(MAX_X / 2)
-    y = int(MAX_Y / 2)
+    y = int(MAX_Y - 15)
     position = Point(x, y)
 
     # This is redundant since we already set these in the Actor's __init__
@@ -79,6 +77,7 @@ def main():
         position = position.scale(CELL_SIZE)
 
         # setting random red, green, and blue coloring
+        """Can be changed to a set color"""
         r = random.randint(0, 255)
         g = random.randint(0, 255)
         b = random.randint(0, 255)
@@ -89,18 +88,16 @@ def main():
         gem.set_text(text)
         gem.set_font_size(FONT_SIZE)
         # set random color 
-        """Do we want this to stay random, or a set color?"""
         gem.set_color(color)
         # set random position
         gem.set_position(position)
         # grab value
-        """Is this correct?"""
-        #gem.set_value(value)
-        # set velocity - adding value to y
-        gem.set_velocity(Point(0,15))
+        gem.set_value(1)
+        # set velocity - adding value to y so it moves down the screen
+        gem.set_velocity(Point(0, 15))
         cast.add_actor("gems", gem)
         
-    for n in range(DEFAULT_GEMS):
+    for n in range(DEFAULT_ROCKS):
         text = "@"
 
         x = random.randint(1, COLS - 1)
@@ -118,8 +115,8 @@ def main():
         rock.set_font_size(FONT_SIZE)
         rock.set_color(color)
         rock.set_position(position)
-        #rock.set_value(value)
-        rock.set_velocity(Point(0,15))
+        rock.set_value(1)
+        rock.set_velocity(Point(0,5))
         cast.add_actor("rocks", rock)
     
     # start the game

@@ -15,7 +15,7 @@ class Rock(Actor):
         Pulls attributes and methods from Actor class """
 
         super().__init__()
-        self._value = -1
+        self._value = ""
 
     def get_value(self):
 
@@ -26,7 +26,7 @@ class Rock(Actor):
 
         return self._value
     
-    def set_value(self,value):
+    def set_value(self, value):
         """
         Updates the value to the given one.
         
